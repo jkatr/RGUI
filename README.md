@@ -1,81 +1,57 @@
 # SendCode for Sublime Text
 
-<a href="https://packagecontrol.io/packages/SendCode"><img src="https://packagecontrol.herokuapp.com/downloads/SendCode.svg"></a>
-<a href="https://www.paypal.me/randy3k/5usd" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
+Modification of randy3k's send code package for sublime text to add features for rgui connection on windows. 
 
-Send code and text to macOS and Linux Terminals, iTerm, ConEmu, Cmder, Tmux, Terminus; R (RStudio), Julia, IPython.
+See readme for the original [project](https://github.com/randy3k/SendCode).
 
-![](https://user-images.githubusercontent.com/1690993/28198891-4ebe5eaa-682f-11e7-8173-10b64faef9b4.png)
+Features
 
-
-Following Programs are supported
-
-- Mac: Terminal, iTerm (>=2.9), R GUI, RStudio Desktop, RStudio and Jupyter running on Chrome and Safari
-- Windows: Cmder, ConEmu, R GUI, RStudio Desktop
-- Linux: Tmux, Screen, Gnome-Terminal, Pantheon-Terminal, Mate-Terminal, Konsole, RStudio Desktop
-- Sublime Plugin: [Terminus](https://github.com/randy3k/Terminus)
+- Work with multiple RGUIs (connects to last active rgui).
+- Send line (block) of code directly to rgui.
+- Run selected code in rgui by sourcing a temp file.
+- Run whole (unsaved) script by sourcing a temp file.
+- Use clipboard to copy data from/to excel.
 
 ### Installation
 
-You could install SendCode via Package Control.
-
-- If you don't have Package Control installed, follow the [installation instructions on the Package Control website](https://packagecontrol.io/installation).
-- In Sublime Text, type <kbd>cmd</kbd>+<kbd>shift</kbd>+<kbd>p</kbd> (Mac) or <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd> (Windows/Linux)  to bring up the command palette.
-- Into the command palette start typing `Package Control: Install Package` and select the option when in pops up.
-- In the Install Package window start typing `SendCode` and select the option when it pops up.
-- SendCode should then be installed.
-
-If you are using Linux, we might need to install
-[xdotool](http://www.semicomplete.com/projects/xdotool/) to use some features. Ubuntu users can use
-```
-sudo apt-get install xdotool
-```
-If it cannot be found, you will be prompted
-to download a [binary distribution](https://github.com/randy3k/sublime-xdotool).
+Install manually by downloading the package copying to corresponding sublime folder. 
 
 ### Usage
 
 Select a program using the command `SendCode: Choose Program` in command palette. The default program on macOS, windows and linux are Terminal, Cmder and tmux respectively. Each syntax binds to its own program. For instance, you could bind `R` to r files and `tmux` to python files.
 
-There are two main keybindings:
+### Default keybindings:
 
-- <kbd>cmd</kbd>+<kbd>enter</kbd> (Mac) or <kbd>ctrl</kbd>+<kbd>enter</kbd> (Windows/Linux)
+- <kbd>f4</kbd>
 
-    If text is selected, it sends the text to the program selected. If no text is selected, then it sends the current block (if found). Finally, it moves the cursor to the next line.
+    Sets the working directory to current file path. 
 
 
-- <kbd>cmd</kbd>+<kbd>b</kbd> (Mac) or <kbd>ctrl</kbd>+<kbd>b</kbd> (Windows/Linux): source current file (R, Julia and Python (IPython) only)
+- <kbd>f5</kbd>
 
-    SendCode uses Sublime build system to source files, you might have to choose the `Source File` option in a pop up window.
+    Creates a temp file containig the current script, which doesn't have to be saved. The temp file is then sourced in the rgui. 
 
+
+- <kbd>f6</kbd>
+
+    If text is selected creates a temp file containig the selection. The temp file is then sourced in the rgui. 
+
+- <kbd>f7</kbd>
+
+    If text is selected, it sends the text to the program selected. If no text is selected, then it sends the current line (or block, if found). Finally, it moves the cursor to the next line.
+
+- <kbd>f12</kbd>
+
+    Removes all R objects closes graphics devices.
+
+- <>
 
 ### Troubleshooting
 
 
-1. Python console
-
-   [IPython](https://ipython.org) (5.0 or above, or any repls which support bracketed paste mode) are assumed to be used.
-
-1. [radian](https://github.com/randy3k/radian) console
-
-   You might want to turn on `bracketed_paste_mode` if [radian](https://github.com/randy3k/radian) is used.
-
-1. RStudio on Windows
-    
-   Make sure [RStudio v1.1.383](https://www.rstudio.com/products/rstudio/download/) or above is used.
-
 1. R Gui on Windows
 
    Make sure the corresponding R program is opened when you are sending the text.
-
-1. Cmder/ Conemu on Windows
-
-   You might need to set the path to `ConEmuC.exe` in SendCode settings. For Cmder, the file is located at
-   `<path to cmder folder>\\vendor\\conemu-maximus5\\ConEmu\\ConEmuC.exe`.
-
-1. Safari-Jupyter on macOS
-
-   Most likely you haven't enabled JavaScript for AppleScript. Check the option "Allow JavaScript from Apple Events" in the `Develop` menu (the `Develope` menu needs to be enabled in the preferences).
 
 
 ### Custom Keybindings
@@ -161,22 +137,3 @@ Project-wise settings could also be specified in `sublime-project` as
 ```
 
 
-### Block expansion
-
-SendCode uses the following logics to expand cursor when sending code.
-
-- Expand current line to match `()`, `[]` and `{}`.
-- R: 
-  - backward expand if the previous line ends with a pipe opeartor `%>%`
-  - `# %%` decorators
-  - `#+` spin decorators
-  - `#'` roxygen decorators
-- Julia
-  - `begin`, `end` indented pairs.
-  - `# %%` decorators
-- Python: 
-  - indentations
-  - `# %%` decorators.
-- (See the settings `block_start_pattern` and `block_end_pattern`)
-- Markdown fenced code blocks 
-  - put the cursor at the line of <kbd>\`\`\`</kbd> to send the whole block.
