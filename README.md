@@ -1,4 +1,4 @@
-# SendCode for Sublime Text
+# RGUI for Sublime Text
 
 Modification of randy3k's send code package for sublime text to add features for rgui connection on windows. 
 
