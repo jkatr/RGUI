@@ -18,7 +18,7 @@ Default keybindings:
 
 - <kbd>f4</kbd>
 
-    If text is selected, it sends the text to the program selected. If no text is selected, then it sends the current block (if found). Finally, it moves the cursor to the next line.
+    Sets the working directory to the path of the current file.
 
 - <kbd>f5</kbd>
 
@@ -30,7 +30,11 @@ Default keybindings:
 
 - <kbd>f7</kbd>
 
-    If text is selected, sends the text the rgui. If no text is selected, then it sends the current line (or block). Finally, it moves the cursor to the next line.
+    If text is selected, sends the text to the rgui. If no text is selected, then it sends the current line (or block). Finally, it moves the cursor to the next line.
+
+- <kbd>Ctrl+Insert</kbd>
+
+    Copies the contents of selected variable or the selected code output to the clipboard.
 
 ### Troubleshooting
 
