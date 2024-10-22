@@ -1,0 +1,12 @@
+{
+    "prog": "r",
+    "auto_expand_line": true,
+    "auto_advance" : true,
+    "auto_advance_non_empty": false,
+    "block_start_pattern": "# ?%%|# ?\\+|# In \\[",
+    "block_end_pattern":   "# ?%%|# ?\\+|#'|# In \\[",
+
+    "r" : {
+        "prog": "r"
+    }
+}

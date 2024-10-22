@@ -3,7 +3,7 @@ import sublime_plugin
 from .settings import Settings
 
 
-class SendCodeChooseProgCommand(sublime_plugin.TextCommand):
+class RGUIChooseProgCommand(sublime_plugin.TextCommand):
 
     def show_quick_panel(self, options, done, **kwargs):
         sublime.set_timeout(

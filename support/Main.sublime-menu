@@ -10,13 +10,13 @@
                 "id": "package-settings",
                 "children": [
                     {
-                        "caption": "SendCode",
+                        "caption": "RGUI",
                         "children": [
                             {
                                 "command": "edit_settings",
                                 "args": {
-                                    "base_file": "${packages}/SendCode/SendCode ($platform).sublime-settings",
-                                    "user_file": "${packages}/User/SendCode.sublime-settings"
+                                    "base_file": "${packages}/RGUI/RGUI ($platform).sublime-settings",
+                                    "user_file": "${packages}/User/RGUI.sublime-settings"
                                 },
                                 "caption": "Settings"
                             },
@@ -25,7 +25,7 @@
                                 "command": "edit_settings",
                                 "args":
                                 {
-                                    "base_file": "${packages}/SendCode/support/Default (${platform}).sublime-keymap",
+                                    "base_file": "${packages}/RGUI/support/Default (${platform}).sublime-keymap",
                                     "default": "[\n\t$0\n]\n"
                                 }
                             }

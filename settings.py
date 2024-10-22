@@ -4,20 +4,15 @@ import sublime
 class Settings:
     scope_mapping = {
         "source.r": "r",
-        "text.tex.latex.rsweave": "rnw",
-        "text.html.markdown.rmarkdown": "rmd",
-        "text.html.markdown": "md",
-        "source.python": "python",
-        "source.julia": "julia"
     }
 
     def __init__(self, view):
-        self.s = sublime.load_settings("SendCode.sublime-settings")
+        self.s = sublime.load_settings("RGUI.sublime-settings")
         self.view = view
 
     def syntax(self):
         """
-        SendCode.settings.Settings(view).syntax()
+        RGUI.settings.Settings(view).syntax()
         """
         pt = self.view.sel()[0].begin() if len(self.view.sel()) > 0 else 0
         # to go beginning of the line
@@ -37,7 +32,7 @@ class Settings:
         window = sublime.active_window()
         if window:
             project_data = window.project_data() or {}
-            project_settings = project_data.get("settings", {}).get("SendCode", {})
+            project_settings = project_data.get("settings", {}).get("RGUI", {})
             if project_settings:
                 settings_list.insert(0, project_settings)
 
@@ -61,7 +56,7 @@ class Settings:
         window = sublime.active_window()
         if window:
             project_data = window.project_data() or {}
-            project_settings = project_data.get("settings", {}).get("SendCode", {})
+            project_settings = project_data.get("settings", {}).get("RGUI", {})
 
             if key == "prog" and key in project_settings:
                 project_settings[key] = value
@@ -88,4 +83,4 @@ class Settings:
         else:
             self.s.set(key, value)
 
-        sublime.save_settings('SendCode.sublime-settings')
+        sublime.save_settings('RGUI.sublime-settings')
