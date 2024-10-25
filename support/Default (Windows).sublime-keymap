@@ -14,7 +14,7 @@
     },      
     {
         "keys": ["f7"], "command": "rgui",
-        "args" : {"resolve" : false, "prog" : "r.post"}
+        "args" : {"prog" : "r.post"}
     },
     {
           "keys" : ["ctrl+insert"], "command" : "rgui",

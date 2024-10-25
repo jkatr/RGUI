@@ -8,24 +8,18 @@ from ..settings import Settings
 
 PostMessage = ctypes.windll.user32.PostMessageA
 FindWindow = ctypes.windll.user32.FindWindowW
-BringWindowToTop = ctypes.windll.user32.BringWindowToTop
-SetForegroundWindow = ctypes.windll.user32.SetForegroundWindow
+SetWindowPos = ctypes.windll.user32.SetWindowPos
 
 class CodeSender:
 
-    def __init__(self, view, cmd=None, prog=None, from_view=True, hwnd = None):
+    def __init__(self, view, cmd=None, prog=None, hwnd = None):
         self.view = view
         self.settings = Settings(view)
         if prog:
             self.prog = prog
         else:
             self.prog = self.settings.get("prog")
-        self.from_view = from_view
         self.hwnd = hwnd
-
-    @classmethod
-    def initialize(cls, view, **kwargs):
-        return CodeSender(view, **kwargs)
 
     def send_text(self, cmd):
         cmd = cmd.rstrip()
@@ -60,18 +54,15 @@ class CodeSender:
 
     def find_rgui(self):
         rid = FindWindow(None, 'R Console (64-bit)')
+        if not rid:
+            sublime.message_dialog("Rgui (R Console (64-bit)) not found.")
         return rid
 
     def bring_rgui_to_top(self, rid):
         
-        #BringWindowToTop(rid)
-        #SetForegroundWindow(rid)
-        
-        PostMessage(rid, int(0x0112), int(0xF020), 0) #minimize
         PostMessage(rid, int(0x0112), int(0xF120), 0) #restore
-
-        PostMessage(self.hwnd, int(0x0112), int(0xF020), 0) #minimize
-        PostMessage(self.hwnd, int(0x0112), int(0xF120), 0) #restore
+        SetWindowPos(rid,-1,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order
+        SetWindowPos(rid,-2,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order
         
     def post_to_rgui(self, rid, cmd):
         for char in cmd:

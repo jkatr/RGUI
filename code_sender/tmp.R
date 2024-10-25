@@ -1,5 +1,5 @@
-  matplot(as.Date(alldates), comm_single_model_plot_data, type ='l', xlab ='')
-  matlines(as.Date(alldates), comm_model_plot_data, type ='l', lty = 3, lwd = 2, col  = 3:4)
-  legend('topleft', legend = c(mdl, 'REALIZED', comm_model_ref), lty = 1, col=1:4)
-  abline(h = 0.1, lty = 2)
-  abline(v = as.Date('2023-09-30'), lty = 2)
+
+test = function(x){
+
+    x^2
+}
