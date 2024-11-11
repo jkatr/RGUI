@@ -60,10 +60,17 @@ class CodeSender:
 
     def bring_rgui_to_top(self, rid):
         
-        PostMessage(rid, int(0x0112), int(0xF120), 0) #restore
+        if ctypes.windll.user32.IsIconic(rid) == 1: #if minimized
+            PostMessage(rid, int(0x0112), int(0xF120), 0) #restore
+
         SetWindowPos(rid,-1,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order
         SetWindowPos(rid,-2,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order
         
+        #PostMessage(self.hwnd, int(0x0112), int(0xF120), 0) #restore
+
+        SetWindowPos(self.hwnd,-1,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order
+        SetWindowPos(self.hwnd,-2,None,None,None,None, int(0x0001)+int(0x0002)) #change z-order        
+
     def post_to_rgui(self, rid, cmd):
         for char in cmd:
             PostMessage(rid, int(0x102), ord(char), 0)     
